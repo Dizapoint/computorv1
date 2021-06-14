@@ -30,6 +30,15 @@ def getAnswer(left, b):
     is_x = 0
     count_x = []
     x = 0
+    if left == 'x-x':
+        left = '0'
+        if b != float(left):
+            printer.printFull(parsing.Parsing, str(b) + ' != ' + str(left), 2)
+            printer.printInfo(parsing.Parsing, 5)
+            printer.printErr(parsing.Parsing, 2)
+        elif b != float(left):
+            printer.printFull(parsing.Parsing, str(b) + '=' + str(left), 2)
+            printer.printInfo(parsing.Parsing, 4)
     answer = 'x='
     while i < len(left):
         if i == 0 or (left[i] != '+' and left[i] != '-'):

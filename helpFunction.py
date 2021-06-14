@@ -1,12 +1,26 @@
 #-*-coding: utf-8 -*-
 import printer, parsing
 
+def is_integer(read):
+    i = 0
+    numz = '0123456789'
+    while i < len(read):
+        if i == 0 and (read[i] == '-' or read[i] == '+'):
+            i += 1
+            continue
+        elif not read[i] in numz:
+            return False
+        i+=1
+    return True
+
 def calc(read):
     degree = '^'
     multiply = '*'
     devision = '/'
     add = '+'
     subtract = '-'
+    if is_integer(read):
+        return float(read)
     while degree in read:
         k = read.index('^')
         read = rewrite(k, read, 1)
@@ -38,6 +52,7 @@ def calc(read):
                     if read[test] == "^" or read[test] == "*" or read[test] == "/" \
                             or read[test] == "+" or read[test] == "-":
                         find += 1
+                        m = test
                     test += 1
                 if find == 0:
                     return float(read)
