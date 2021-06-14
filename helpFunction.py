@@ -256,6 +256,8 @@ def redused(exp):
             count += 1
         if exp.left[len(exp.left) - 1] == '+' or exp.left[len(exp.left) - 1] == '-':
             exp.left = exp.left[0:len(exp.left) - 1]
+        if len(exp.left) == 0:
+            exp.left = '0'
         if exp.left[0] == '-':
             exp.left = exp.left[1:len(exp.left)]
         if exp.left[0] == '+':
