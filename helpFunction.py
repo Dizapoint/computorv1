@@ -99,8 +99,8 @@ def rewrite(ind, read, flag):
     while i + 1 < len(read):
         test = read[i + 1]
         if test in numz:
-            # if test == '-':
-            #     break
+            if test == '-':
+                break
             buf1 += test
             i += 1
         else:
@@ -282,6 +282,9 @@ def redused(exp):
         elif deliver == 2:
             exp.right = str(calc(exp.right + '/' + str(right)) * -1)
     else:
+        if 'x' in exp.right and len(exp.right) == 1:
+            buffer += '-x'
+            exp.right = '0'
         while 'x' in exp.right:
             place = exp.right.index('x')
             if place != 0 and exp.right[place - 1] in priory:
