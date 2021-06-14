@@ -99,7 +99,7 @@ def printInfoRu(exp, color, flag):
     elif flag == 8:
         print("D < 0; Решений нет.")
     elif flag == 9:
-        print("There are two solution:")
+        print("Два корня:")
     if color == 2:
         print(bcolors.ENDC)
 

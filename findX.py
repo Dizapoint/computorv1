@@ -57,10 +57,22 @@ def getAnswer(left, b):
         i += 1
     is_x += 1
     if is_x == is_sign + 1 and oops == 0:
+        s1=''
+        s2=''
+        if left.index('x')-1 >= 0:
+            s1 = left[left.index('x')-1]
+        elif left.index('x')+1 >= 0:
+            s2 = left[left.index('x')+1]
         left = left.replace('x', '1')
-        math = helpFunction.calc(left)
-        if b != 0 and str(math) != 0:
+        if s2 != '/':
+            math = helpFunction.calc(left)
+        else:
+            math = helpFunction.calc(left[left.index(s2)+1:])
+        if b != 0 and str(math) != 0 and s1 !='/':
             math = helpFunction.calc(str(b) + '/' +str(math))
+            answer += str(math)
+        elif b != 0 and str(math) != 0 and s == '/':
+            math = helpFunction.calc(str(math) + '/' + str(b))
             answer += str(math)
         else:
             answer += '0'
@@ -274,3 +286,24 @@ def findDegree(exp):
             exp.right = s
     exp.all = exp.left + '=' + exp.right
     return exp
+
+def testX(read):
+        numz = '0123456789'
+        s = '+-=*^/'
+        x = 'x'
+        i = 0
+        count_num = 0
+        count_x = 0
+        count_s = 0
+        while i < len(read):
+            if read[i] in numz:
+                count_num += 1
+            elif read[i] in s:
+                count_s += 1
+            elif read[i] in x:
+                count_x += 1
+            i += 1
+        if count_num == 0 and count_s + count_x == len(read):
+            return True
+        else:
+            return False

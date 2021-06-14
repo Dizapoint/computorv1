@@ -90,9 +90,15 @@ class Parsing:
         if Parsing.expNum != 0:
             Parsing.check_exp(read)
 
+
     def get_reduced(exp):
         exp = findX.findDegree(exp)
         d = exp.degree
+        testing = findX.testX(exp.all)
+        if testing:
+            exp.all = exp.all.replace('x','1')
+            exp.left = exp.all[0: exp.all.index('=')]
+            exp.right = exp.all[exp.all.index('=') + 1:]
         if exp.left == 'x' and not 'x' in exp.right:
             printer.printInfo(exp, 2)
             res = helpFunction.calc(exp.right)

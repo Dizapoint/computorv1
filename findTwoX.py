@@ -382,6 +382,8 @@ def findAnswers(exp, a):
     k = h.calc(left)
     if k < 0:
         k *= -1
+    if a == 0:
+        a = 1
     squre = k / a
     if exp.flags % 10 == 2:
         printer.printFull(exp, "squre of " + str(squre), 2)

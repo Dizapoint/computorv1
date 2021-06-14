@@ -99,10 +99,11 @@ def rewrite(ind, read, flag):
     while i + 1 < len(read):
         test = read[i + 1]
         if test in numz:
-            if test == '-':
+            if point != 0 and test == '-':
                 break
             buf1 += test
             i += 1
+            point += 1
         else:
             break
     if l > 1:
@@ -194,7 +195,7 @@ def findNum(ind, flag, read, is_index):
 
 def redused(exp):
     numz = '0123456789'
-    priory = '*^.,'
+    priory = '/*^.,'
     right = ''
     right_buf = ''
     left = ''
@@ -204,7 +205,7 @@ def redused(exp):
     count = 0
     deliver = 0
     #слева должны остаться все выражения с x
-    if not 'x' in exp.left and not 'X' in exp.left:
+    if not 'x' in exp.left and not 'x' in exp.left:
         right = float(calc(exp.left)) * (-1)
     else:
         while 'x' in exp.left:
@@ -238,7 +239,10 @@ def redused(exp):
                 while go_end < len(exp.left) and (exp.left[go_end] in numz or exp.left[go_end] in priory):
                     two += exp.left[go_end]
                     go_end += 1
-                buffer += exp.left[place - 1] + two
+                if place != 0:
+                    buffer += exp.left[place - 1] + exp.left[place]+exp.left[place + 1] + two
+                else:
+                    buffer += exp.left[place + 1] + two
                 if go_end < len(exp.left):
                     left+= exp.left[go_end:]
             else:
@@ -286,7 +290,9 @@ def redused(exp):
     else:
         if 'x' in exp.right and len(exp.right) == 1:
             buffer += '-x'
-            exp.right = '0'
+            exp.right = str(right)
+            if len(exp.right) == 0:
+                exp.right = '0'
         while 'x' in exp.right:
             place = exp.right.index('x')
             if place != 0 and exp.right[place - 1] in priory:
@@ -307,6 +313,8 @@ def redused(exp):
             else:
                 if place == 0 or (place > 0 and exp.right[place - 1] != '-'):
                     one += '-'
+                else:
+                    one += '+'
                 one += 'x'
                 if place != 0:
                     right_buf = exp.right[0:place-1]
