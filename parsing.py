@@ -1,5 +1,5 @@
 #-*-coding: utf-8 -*-
-import findX, printer
+import findX, printer, parsing
 
 def analyze(char):
     numz = "0123456789"
@@ -93,7 +93,11 @@ class Parsing:
     def get_reduced(exp):
         exp = findX.findDegree(exp)
         d = exp.degree
-        if d <= 0 and not 'x' in exp.all:
+        if exp.left == exp.right:
+            exp.all = '1=1'
+            printer.printInfo(exp, 3)
+            printer.printInfo(exp, 4)
+        elif d <= 0 and not 'x' in exp.all:
             exp = findX.NoX(exp)
         elif d == 1 or d <= 0:
             exp = findX.OneX(exp)
@@ -118,6 +122,8 @@ class Parsing:
         prev = ''
         buf = []
         strin = strin.replace(" ", "")
+        if not '=' in strin:
+            printer.printErr(parsing.Parsing, 2)
         max_degree = -1
         while i < len(strin):
             test = analyze(strin[i])

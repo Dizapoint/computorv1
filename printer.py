@@ -44,7 +44,7 @@ def printInfo(exp, flag):
         if color == 2:
             print(bcolors.WARNING)
         if flag == 1:
-            print("usage: ./computor <math expression> [-c|--color|-r|--ru|-f|--full]")
+            print("Usage: python3 computor.py <math expression> [-c|--color|-r|--ru|-f|--full]")
         elif flag == 2:
             print('There is one solution.')
         elif flag == 3:
@@ -83,7 +83,7 @@ def printInfoRu(exp, color, flag):
     if color == 2:
         print(bcolors.WARNING)
     if flag == 1:
-        print("Использование: ./computor <math expression> [-c|--color|-r|--ru|-f|--full]")
+        print("Использование: python3 computor.py <math expression> [-c|--color|-r|--ru|-f|--full]")
     elif flag == 2:
         print('В заданном выражении один корень.')
     elif flag == 3:
